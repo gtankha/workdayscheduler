@@ -76,13 +76,19 @@ var save = function(idnumb,txte) {
  textarray = JSON.parse(textvalueunparsed);
  if (!(textarray)) { var textarray = ["","","","","","","","",""]};
 
-
+ // set the calendar hours display
+ setHours();
+ // set the calendar colors and content
+ calColors();
+ // Keep checking calendar entries every 5 minutes incase user leaves application open and doesn't refresh
+ 
+ setInterval(function(){ 
 // set the calendar hours display
 setHours();
-
 // set the calendar colors and content
 calColors();    
-
+ }
+, (5*1000*60));
 
 // execute function if save button is clicked
 $(".saveBtn").click(function() {
