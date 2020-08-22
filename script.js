@@ -1,4 +1,8 @@
 
+var textarray = [];
+
+
+
 var setHours = function() {
 // Add the current date on top
 var cday  = moment().format('dddd, MMMM Do')
@@ -32,6 +36,9 @@ var calColors = function () {
     // capture the current hour but convert to 24 hr format to make comparison simpler
     var time24 = parseInt(moment().format('k'));
     var time12 = parseInt(moment().format('h'));
+    // get textarea value from local storage
+    var textvalueunparsed = localStorage.getItem("textareaval");
+    textarray = JSON.parse(textvalueunparsed);
 
    //  convert calendar hour into 24hr format for comparison purposes
    
@@ -41,6 +48,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[0]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#ten');
@@ -49,6 +57,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[1]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#eleven');
@@ -57,6 +66,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[2]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#twelve');
@@ -65,6 +75,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[3]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#thirteen');
@@ -73,6 +84,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[4]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#fourteen');
@@ -81,6 +93,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[5]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#fifteen');
@@ -89,6 +102,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[6]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#sixteen');
@@ -97,6 +111,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[7]);
    addcls (tcal24,time24,righttextarea);
 
    var tcal = $('#seventeen');
@@ -105,6 +120,7 @@ var calColors = function () {
    var tcal24 = parseInt(tcal24m.format('k'));
    var rightparent = (tcal.parent()).parent();
    var righttextarea = rightparent.find("textarea");
+   righttextarea.text(textarray[8]);
    addcls (tcal24,time24,righttextarea);
 
     }    
@@ -127,20 +143,28 @@ else {
 
 }
 
-var save = function(event) {
+var save = function(idnumb,txte) {
 
-    console.log("i am here");
+    console.log(idnumb);
+    console.log(txte);
+    textarray[idnumb-9] = txte;
+    localStorage.setItem("textareaval", JSON.stringify(textarray));
+
 }
 
 
 setHours();
 calColors();    
 
-$("#saveBtn").click(function () {
-    console.log("hello");
-    save();
-}
-    ) ;
+$(".saveBtn").click(function() {
+    var idn = $(this).attr("id");
+    var txt = $(this).closest(".row").find("#tarea").val();
+    var txtt = txt.trim();
+    console.log(txtt);
+
+    save(idn,txtt);
+});
+
 
 
 
