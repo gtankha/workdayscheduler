@@ -66,9 +66,7 @@ var save = function(idnumb,txte) {
 // function save data into local storage
     textarray[idnumb-9] = txte;
     localStorage.setItem("textareaval", JSON.stringify(textarray));
-
 }
-
 
 // initatlize the calendar text
  var textarray = new Array(9);
